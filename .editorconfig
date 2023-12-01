@@ -1,0 +1,9 @@
+# 'root' = true para que seja aplicado a todas os diretórios daqui para baixo (pode-se 
+# criar um para cada dir)
+root = true
+
+# '*' Especifica para que tipo de arquivo deve ser aplicado (no caso, todos, 
+# mas poderia ser apenas '.js', '.py', etc)
+[*]
+indent_style = space
+indent_size = 2
