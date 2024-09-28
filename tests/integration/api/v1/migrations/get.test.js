@@ -1,10 +1,11 @@
 import database from "infra/database";
+import { waitForAllServices } from "tests/orchestrator";
 
-// Limpando o Banco para iniciar os testes sempre com o mesmo state
-beforeAll(cleanDatabase);
-async function cleanDatabase() {
+beforeAll(async () => {
+  await waitForAllServices();
+  // Limpando o Banco para iniciar os testes sempre com o mesmo state
   await database.query("drop schema public cascade; create schema public");
-}
+});
 
 test("GET to /api/v1/migrations should return 200", async () => {
   const response = await fetch("http://localhost:3000/api/v1/migrations");
