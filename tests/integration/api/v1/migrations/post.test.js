@@ -1,10 +1,11 @@
 import database from "infra/database";
+import { waitForAllServices } from "tests/orchestrator";
 
-// Limpando o Banco para iniciar os testes sempre com o mesmo state
-beforeAll(cleanDatabase);
-async function cleanDatabase() {
+beforeAll(async () => {
+  await waitForAllServices();
+  // Limpando o Banco para iniciar os testes sempre com o mesmo state
   await database.query("drop schema public cascade; create schema public");
-}
+});
 
 test("POST to /api/v1/migrations should return 200", async () => {
   // Testando a 1a Requisição: deve retornar > 1, pois temos alguma Migration para rodar
