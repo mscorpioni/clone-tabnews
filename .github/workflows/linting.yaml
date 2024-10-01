@@ -1,0 +1,32 @@
+# Nome do Workflow
+name: Linting
+
+# Evento a ser ouvido
+on: pull_request
+
+# Trabalhos que serão executados ao evento ser ouvido
+jobs:
+  prettier:
+    name: Prettier
+
+    # O runner (OS) que rodará as ações
+    runs-on: ubuntu-latest
+    steps:
+      # Usa uma Action chamada checkout que vai puxar a branch
+      #  que foi submetida ao pull request em questão
+      - uses: actions/checkout@v4
+
+      # Usa uma Action chamada setup-node que configura
+      # a versão do Node que queremos usar
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "lts/hydrogen"
+
+      # Executa o comando npm ci para instalar as dependências.
+      # Diferente do comando 'npm install', o 'npm ci' instala as
+      # dependências do 'package-lock.json', que são as versões exatas
+      - run: npm ci
+
+      # Executa o comando 'lint:prettier:check' do nosso arquivo 'package.json'
+      # para rodar o lint
+      - run: npm run lint:prettier:check
