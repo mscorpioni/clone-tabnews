@@ -28,10 +28,11 @@ async function getNewClient() {
   return client;
 }
 
-export default {
+const database = {
   query,
   getNewClient,
 };
+export default database;
 
 function getSSLValues() {
   // Caso o banco use um Self-signed Certificate
