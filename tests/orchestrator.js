@@ -1,3 +1,4 @@
+import database from "infra/database";
 // Para que o Jest aguarde até que o servidor web esteja de pé
 // antes de iniciar os testes.
 import retry from "async-retry";
@@ -19,4 +20,8 @@ export async function waitForAllServices() {
       }
     }
   }
+}
+
+export async function clearDatabase() {
+  await database.query("drop schema public cascade; create schema public");
 }

@@ -1,10 +1,9 @@
-import database from "infra/database";
-import { waitForAllServices } from "tests/orchestrator";
+import { clearDatabase, waitForAllServices } from "tests/orchestrator";
 
 beforeAll(async () => {
   await waitForAllServices();
   // Limpando o Banco para iniciar os testes sempre com o mesmo state
-  await database.query("drop schema public cascade; create schema public");
+  await clearDatabase();
 });
 
 describe("POST /api/v1/migrations", () => {
