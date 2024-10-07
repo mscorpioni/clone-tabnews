@@ -1,7 +1,7 @@
 import migrationRunner from "node-pg-migrate";
 
 // módulo para criar caminhos de forma correta para diferentes sistemas operacionais, colocando / ou \ conforme o sistema
-import { join } from "node:path";
+import { resolve } from "node:path";
 
 import database from "infra/database";
 
@@ -22,7 +22,7 @@ export default async function migratons(request, response) {
     const defaultMigrationOptions = {
       dbClient: dbClient,
       dryRun: true,
-      dir: join("infra", "migrations"),
+      dir: resolve("infra", "migrations"),
       direction: "up",
       verbose: true,
       migrationsTable: "pgmigrations",
